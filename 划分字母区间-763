@@ -16,12 +16,12 @@ public:
         int prev = hash2[s[0]];
         int j = 0;
         for(int i = 0;i <s.size();i++){
-            if(hash1[s[i]] > prev){
+            if(hash1[s[i]] > prev){//没有重合即开启新片段
                 a.push_back(0);
                 j++;
             }
             if(hash2[s[i]] > prev)
-                prev = hash2[s[i]];
+                prev = hash2[s[i]];//找到一个片段中最远的位置
             a[j]++;
         }
         return a;
