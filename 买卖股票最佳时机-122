@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int cnt = 0;
+        for(int i = 0;i < prices.size()-1;i++){
+            if(i == 0 || prices[i] < prices[i-1]){//找到股票出现下降趋势的位置 或者是首位
+                int j = i;
+                while(j <prices.size()-1 && prices[j+1] >= prices[j])//注意要把是否出界放到前面判断  寻找低点一直保持上升趋势的最高点
+                    j++;
+                cnt += prices[j]-prices[i];//找到最高点 算收益
+            }
+        }
+        return cnt;
+    }
+};
+//注意若想求收益最大值，则每个极小值到极大值都要作差后，加在一起
