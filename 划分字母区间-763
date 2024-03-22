@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        vector<int> a;
+        a.push_back(0);//需要先添加一个数，否则runtime error
+        vector<int>hash1(128,0);//最初出现位置
+        vector<int>hash2(128,0);//最后出现位置
+        for(int i = 0;i < s.size();i++){
+            if(hash1[s[i]]==0){
+                hash1[s[i]] = i;
+                hash2[s[i]] = i;
+            }
+            else
+                hash2[s[i]] = i;
+        }
+        int prev = hash2[s[0]];
+        int j = 0;
+        for(int i = 0;i <s.size();i++){
+            if(hash1[s[i]] > prev){
+                a.push_back(0);
+                j++;
+            }
+            if(hash2[s[i]] > prev)
+                prev = hash2[s[i]];
+            a[j]++;
+        }
+        return a;
+    }
+};
