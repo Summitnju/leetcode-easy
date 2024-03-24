@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        sort(people.begin(),people.end(),[](vector<int>&a,vector<int>&b){return a[0]>b[0] || (a[0] == b[0] && a[1] < b[1]);});//按照身高从大到小（如果相等就按人数从小到大）排序 因为矮的对高的没有影响 所以先排高的
+        vector<vector<int>> result;
+        result.insert(result.begin(),people[0]);//填进去第一个人，必定最高
+        for(int i = 1;i < people.size();i++){
+            int j = 0,k = 0;
+            while(j != people[i][1]){//遍历找到自己所在的位置
+                k++;
+                j++;
+            }
+            result.insert(result.begin()+k,people[i]);插入
+        }
+        return result;
+    }
+};
